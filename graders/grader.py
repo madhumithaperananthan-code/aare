@@ -13,6 +13,14 @@ class AAREGrader:
     def get_score(self):
 
         if self.total_attacks == 0:
-            return 0.0
+            return 0.5   # safe neutral score
 
-        return self.blocked_attacks / self.total_attacks
+        score = self.blocked_attacks / self.total_attacks
+
+        # ensure score is strictly between (0,1)
+        if score <= 0:
+            score = 0.1
+        elif score >= 1:
+            score = 0.9
+
+        return score
