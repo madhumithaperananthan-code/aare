@@ -5,18 +5,15 @@ entrypoint: env.aare_env:AAREEnv
 
 tasks:
   - name: easy
-    difficulty: easy
-    description: Defend against a single SQL injection attack.
+    path: tasks.easy:EasyTask
     grader: graders.grader:AAREGrader
 
   - name: medium
-    difficulty: medium
-    description: Defend against SQL injection and brute force attacks.
+    path: tasks.medium:MediumTask
     grader: graders.grader:AAREGrader
 
   - name: hard
-    difficulty: hard
-    description: Defend against multiple attack types including XSS and privilege escalation.
+    path: tasks.hard:HardTask
     grader: graders.grader:AAREGrader
 
 version: 0.1
