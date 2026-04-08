@@ -1,0 +1,19 @@
+name: aare
+description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
+
+entrypoint: env.aare_env:AAREEnv
+
+tasks:
+  - name: easy
+    difficulty: easy
+    description: Defend against a single SQL injection attack.
+
+  - name: medium
+    difficulty: medium
+    description: Defend against SQL injection and brute force attacks.
+
+  - name: hard
+    difficulty: hard
+    description: Defend against multiple attack types including XSS and privilege escalation.
+
+version: 0.1

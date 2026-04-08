@@ -1,0 +1,6 @@
+pydantic
+openenv-core
+openai
+fastapi
+uvicorn
+pyyaml
