@@ -7,15 +7,13 @@ from graders.grader import AAREGrader
 
 TASK_NAME = "aare-defense"
 BENCHMARK = "aare"
-MODEL_NAME = os.getenv("MODEL_NAME", "baseline-agent")
 
-# required environment variables
 API_BASE_URL = os.environ["API_BASE_URL"]
 API_KEY = os.environ["API_KEY"]
+MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
 
 
 def choose_action(attack):
-    # simple baseline strategy
 
     mapping = {
         "sql_injection": "sanitize_queries",
@@ -31,14 +29,14 @@ def choose_action(attack):
 
 def main():
 
-    # 🔹 Required: call LLM proxy once
+    # Required LLM proxy call
     client = OpenAI(
         base_url=API_BASE_URL,
         api_key=API_KEY
     )
 
     client.chat.completions.create(
-        model=os.getenv("MODEL_NAME", "gpt-4o-mini"),
+        model=MODEL_NAME,
         messages=[
             {"role": "system", "content": "You are a cybersecurity defense assistant."},
             {"role": "user", "content": "Suggest a mitigation for SQL injection."}
