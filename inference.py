@@ -1,4 +1,5 @@
 import os
+from openai import OpenAI
 
 from env.aare_env import AAREEnv
 from models.action import AAREAction
@@ -7,6 +8,10 @@ from graders.grader import AAREGrader
 TASK_NAME = "aare-defense"
 BENCHMARK = "aare"
 MODEL_NAME = os.getenv("MODEL_NAME", "baseline-agent")
+
+# required environment variables
+API_BASE_URL = os.environ["API_BASE_URL"]
+API_KEY = os.environ["API_KEY"]
 
 
 def choose_action(attack):
@@ -25,6 +30,20 @@ def choose_action(attack):
 
 
 def main():
+
+    # 🔹 Required: call LLM proxy once
+    client = OpenAI(
+        base_url=API_BASE_URL,
+        api_key=API_KEY
+    )
+
+    client.chat.completions.create(
+        model=os.getenv("MODEL_NAME", "gpt-4o-mini"),
+        messages=[
+            {"role": "system", "content": "You are a cybersecurity defense assistant."},
+            {"role": "user", "content": "Suggest a mitigation for SQL injection."}
+        ]
+    )
 
     env = AAREEnv()
     grader = AAREGrader()
