@@ -10,7 +10,11 @@ env = AAREEnv()
 def root():
     return {"message": "AARE environment running"}
 
+<<<<<<< HEAD
 @app.api_route("/reset", methods=["GET", "POST"])
+=======
+@app.get("/reset")
+>>>>>>> 24ed14881863be097febb4479c3ee22ea7160db3
 def reset():
     obs = env.reset()
     return obs.dict()
