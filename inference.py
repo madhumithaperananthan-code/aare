@@ -24,10 +24,31 @@ def choose_action(attack):
 
     return mapping.get(attack, "ignore")
 
+def call_llm_proxy():
+    try:
+        client = OpenAI(
+            base_url=os.environ["API_BASE_URL"],
+            api_key=os.environ["API_KEY"]
+        )
 
+        client.chat.completions.create(
+            model=os.environ.get("MODEL_NAME", "gpt-4o-mini"),
+            messages=[{"role": "user", "content": "ping"}],
+            max_tokens=5
+        )
+
+        print("[LLM_PROXY_CALL]", flush=True)
+
+    except Exception as e:
+        print(f"[LLM_ERROR] {str(e)}", flush=True)
+        
 def main():
 
-    # ---- REQUIRED LLM PROXY CALL ----
+    call_llm_proxy()
+
+    env = AAREEnv()
+    grader = AAREGrader()
+    
     try:
         client = OpenAI(
             base_url=os.environ["API_BASE_URL"],
