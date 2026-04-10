@@ -5,9 +5,8 @@ ATTACK_SEQUENCE = [
     "rate_limit_bypass",
     "xss"
 ]
-class MediumTask:
-
-    name = "medium"
+class HardTask:
+    name = "hard"
 
     def __init__(self):
         self.attack_sequence = ATTACK_SEQUENCE
