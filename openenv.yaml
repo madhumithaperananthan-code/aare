@@ -5,18 +5,18 @@ description: Autonomous Application Resilience Environment for training agents t
 
 entrypoint: env.aare_env:AAREEnv
 
-tasks:
 
+tasks:
   - name: easy
-    module: tasks.easy:EasyTask
+    path: tasks.easy:EasyTask
     grader: graders.grader:AAREGrader
 
   - name: medium
-    module: tasks.medium:MediumTask
+    path: tasks.medium:MediumTask
     grader: graders.grader:AAREGrader
 
   - name: hard
-    module: tasks.hard:HardTask
+    path: tasks.hard:HardTask
     grader: graders.grader:AAREGrader
 
 version: 0.1
