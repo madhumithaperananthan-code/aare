@@ -1,19 +1,22 @@
 name: aare
 description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
 
+
+
 entrypoint: env.aare_env:AAREEnv
 
 tasks:
+
   - name: easy
-    path: tasks.easy:EasyTask
+    module: tasks.easy:EasyTask
     grader: graders.grader:AAREGrader
 
   - name: medium
-    path: tasks.medium:MediumTask
+    module: tasks.medium:MediumTask
     grader: graders.grader:AAREGrader
 
   - name: hard
-    path: tasks.hard:HardTask
+    module: tasks.hard:HardTask
     grader: graders.grader:AAREGrader
 
 version: 0.1
