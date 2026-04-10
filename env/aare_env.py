@@ -6,6 +6,26 @@ from env.app_state import ApplicationState
 from models.observation import AAREObservation
 COMPROMISE_THRESHOLD = 0.9
 
+TASK_ATTACKS = {
+    "easy": [
+        "sql_injection",
+        "sql_injection",
+        "sql_injection"
+    ],
+    "medium": [
+        "sql_injection",
+        "brute_force_login",
+        "rate_limit_bypass",
+        "sql_injection"
+    ],
+    "hard": [
+        "xss",
+        "privilege_escalation",
+        "insecure_file_upload",
+        "rate_limit_bypass"
+    ]
+}
+
 ATTACK_SEVERITY = {
     "sql_injection": 0.6,
     "xss": 0.4,
@@ -22,21 +42,23 @@ class AAREEnv:
         self.current_attack = None
         self.max_steps = 8
         self.step_count = 0
-    def reset(self):
+        self.attack_sequence = []
+        self.sequence_index = 0
+        
+    def reset(self, task: str = "easy"):
+        self.task = task
         self.app_state.reset()
         self.attack_engine.reset_chain()
         self.step_count = 0
-        self.current_attack = self.attack_engine.generate_attack()
+        self.attack_sequence = TASK_ATTACKS.get(task, TASK_ATTACKS["easy"])
+        self.sequence_index = 0
+        self.current_attack = self.attack_sequence[self.sequence_index]
         return self._get_observation()
 
     def step(self, action):
 
         self.step_count += 1
-
-        # apply defense
         self.app_state.apply_defense(action.action_type)
-
-        # check attack success
         attack_blocked = self.attack_engine.check_defense(
             self.current_attack,
             action.action_type
@@ -66,9 +88,12 @@ class AAREEnv:
         # max step condition
         if self.step_count >= self.max_steps:
             done = True
+        self.sequence_index += 1
 
-        # generate next attack
-        self.current_attack = self.attack_engine.generate_attack()
+        if self.sequence_index < len(self.attack_sequence):
+          self.current_attack = self.attack_sequence[self.sequence_index]
+        else:
+          done = True
 
         observation = self._get_observation()
 
