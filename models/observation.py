@@ -1,8 +1,8 @@
-from pydantic import BaseModel
 from typing import List, Dict
+from openenv.core.env_server import Observation
 
 
-class AAREObservation(BaseModel):
+class AAREObservation(Observation):
 
     attack_type: str
     target_component: str
@@ -10,6 +10,4 @@ class AAREObservation(BaseModel):
     vulnerabilities: List[str]
     defense_status: Dict[str, bool]
     failed_attack_streak: int
-
-    # NEW FIELD
     risk_score: float

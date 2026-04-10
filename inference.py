@@ -73,7 +73,7 @@ def main():
 
     print(f"[START] task={TASK_NAME} env={BENCHMARK} model={MODEL_NAME}", flush=True)
 
-    observation = env.reset()
+    observation = env.reset("medium")
 
     step = 0
     rewards = []

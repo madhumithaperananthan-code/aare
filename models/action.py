@@ -1,5 +1,5 @@
-from pydantic import BaseModel
+from openenv.core.env_server import Action
 
 
-class AAREAction(BaseModel):
+class AAREAction(Action):
     action_type: str
