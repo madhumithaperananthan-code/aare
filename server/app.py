@@ -1,14 +1,12 @@
 from openenv.core.env_server import create_fastapi_app
+
 from env.aare_env import AAREEnv
-import uvicorn
-
-# Create OpenEnv FastAPI app
-app = create_fastapi_app(AAREEnv)
+from models.action import AAREAction
+from models.observation import AAREObservation
 
 
-def main():
-    uvicorn.run(app, host="0.0.0.0", port=7860)
-
-
-if __name__ == "__main__":
-    main()
+app = create_fastapi_app(
+    AAREEnv,
+    AAREAction,
+    AAREObservation
+)
