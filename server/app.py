@@ -15,7 +15,7 @@ app = create_fastapi_app(
 def _build_task_payload():
     tasks = []
 
-    for task_id, config in TASKS_CONFIG.items():
+    for _, config in TASKS_CONFIG.items():
         tasks.append(
             {
                 "id": config["id"],
@@ -69,6 +69,7 @@ def grade_task(task_id: str, payload: dict | None = None):
         return {
             "task_id": task_id,
             "available": False,
+            "grader": False,
             "score": 0.0,
             "error": "unknown_task",
         }

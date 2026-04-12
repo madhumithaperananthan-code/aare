@@ -1,19 +1,22 @@
+spec_version: 1
 name: aare
-description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
-
+type: space
+runtime: fastapi
+app: server.app:app
+port: 7860
 entrypoint: env.aare_env:AAREEnv
+version: "0.1"
+description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
 
 tasks:
   - name: easy
     path: tasks.easy:EasyTask
-    grader: graders.grader:AAREGrader
+    grader: graders.grader:grade
 
   - name: medium
     path: tasks.medium:MediumTask
-    grader: graders.grader:AAREGrader
+    grader: graders.grader:grade
 
   - name: hard
     path: tasks.hard:HardTask
-    grader: graders.grader:AAREGrader
-
-version: 0.1
+    grader: graders.grader:grade
