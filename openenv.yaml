@@ -1,19 +1,56 @@
+# name: aare
+# description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
+
+# entrypoint: env.aare_env:AAREEnv
+
+# tasks:
+#   - name: easy
+#     path: tasks.easy:EasyTask
+#     grader: graders.grader:AAREGrader
+
+#   - name: medium
+#     path: tasks.medium:MediumTask
+#     grader: graders.grader:AAREGrader
+
+#   - name: hard
+#     path: tasks.hard:HardTask
+#     grader: graders.grader:AAREGrader
+
+# version: 0.1
+spec_version: 1
 name: aare
+type: space
+runtime: fastapi
+app: server.app:app
+port: 7860
+entrypoint: env.aare_env:AAREEnv
+version: "0.1"
 description: Autonomous Application Resilience Environment for training agents to defend web applications against cyber attacks.
 
-entrypoint: env.aare_env:AAREEnv
-
 tasks:
-  - name: easy
+  - id: easy
+    name: easy
+    difficulty: easy
+    description: Defend against repeated SQL injection attacks.
     path: tasks.easy:EasyTask
-    grader: graders.grader:AAREGrader
+    grader: graders.grader:grade
+    max_steps: 3
+    success_threshold: 0.6
 
-  - name: medium
+  - id: medium
+    name: medium
+    difficulty: medium
+    description: Defend against SQL injection and brute-force login attacks.
     path: tasks.medium:MediumTask
-    grader: graders.grader:AAREGrader
+    grader: graders.grader:grade
+    max_steps: 4
+    success_threshold: 0.6
 
-  - name: hard
+  - id: hard
+    name: hard
+    difficulty: hard
+    description: Defend against multiple attack types including XSS and privilege escalation.
     path: tasks.hard:HardTask
-    grader: graders.grader:AAREGrader
-
-version: 0.1
+    grader: graders.grader:grade
+    max_steps: 5
+    success_threshold: 0.6

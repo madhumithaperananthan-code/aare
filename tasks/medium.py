@@ -1,14 +1,34 @@
+# ATTACK_SEQUENCE = [
+#     "sql_injection",
+#     "brute_force_login",
+#     "sql_injection",
+#      "brute_force_login"
+# ]
+
+# class MediumTask:
+
+#     name = "medium"
+#     grader = "graders.grader:AAREGrader"
+
+#     def __init__(self):
+#         self.attack_sequence = ATTACK_SEQUENCE
+
 ATTACK_SEQUENCE = [
     "sql_injection",
     "brute_force_login",
     "sql_injection",
-     "brute_force_login"
+    "brute_force_login",
 ]
 
-class MediumTask:
 
+class MediumTask:
+    id = "medium"
     name = "medium"
-    grader = "graders.grader:AAREGrader"
+    difficulty = "medium"
+    description = "Defend against SQL injection and brute-force login attacks."
+    grader = "graders.grader:grade"
+    max_steps = len(ATTACK_SEQUENCE)
+    success_threshold = 0.6
 
     def __init__(self):
         self.attack_sequence = ATTACK_SEQUENCE
