@@ -40,6 +40,11 @@ ATTACK_SEVERITY = {
 
 
 class AAREEnv(Environment):
+    TASKS = {
+        "easy": "tasks.easy:EasyTask",
+        "medium": "tasks.medium:MediumTask",
+        "hard": "tasks.hard:HardTask"
+    }
 
     def __init__(self):
 

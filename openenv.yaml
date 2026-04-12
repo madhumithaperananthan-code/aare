@@ -6,17 +6,14 @@ entrypoint: env.aare_env:AAREEnv
 tasks:
   - name: easy
     path: tasks.easy:EasyTask
-    grading:
-      grader: graders.grader:AAREGrader
+    grader: graders.grader:AAREGrader
 
   - name: medium
     path: tasks.medium:MediumTask
-    grading:
-      grader: graders.grader:AAREGrader
+    grader: graders.grader:AAREGrader
 
   - name: hard
     path: tasks.hard:HardTask
-    grading:
-      grader: graders.grader:AAREGrader
+    grader: graders.grader:AAREGrader
 
 version: 0.1
