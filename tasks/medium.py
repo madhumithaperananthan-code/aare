@@ -7,7 +7,6 @@ ATTACK_SEQUENCE = [
 class MediumTask:
 
     name = "medium"
-    grader = "graders.grader:AAREGrader"
 
     def __init__(self):
         self.attack_sequence = ATTACK_SEQUENCE

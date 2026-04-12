@@ -9,8 +9,6 @@ ATTACK_SEQUENCE = [
 class HardTask:
 
     name = "hard"
-    grader = "graders.grader:AAREGrader"
 
     def __init__(self):
         self.attack_sequence = ATTACK_SEQUENCE
-      
